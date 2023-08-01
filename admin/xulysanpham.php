@@ -208,7 +208,7 @@
                     <tr>
                         <td><?php echo $i ?></td>
                         <td><?php echo $row_sp['sanpham_name'] ?></td>
-                        <td><img src="../images/<?php echo $row_sp['sanpham_image'] ?>" height="100" width="80"></td>
+                        <td><img src="../uploads/<?php echo $row_sp['sanpham_image'] ?>" height="100" width="80"></td>
                         <td><?php echo $row_sp['sanpham_soluong'] ?></td>
                         <td><?php echo $row_sp['category_name'] ?></td>
                         <td><?php echo number_format($row_sp['sanpham_gia']).'vnđ' ?></td>
