@@ -91,15 +91,9 @@
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
 			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">
-				Giỏ hàng của bạn
+				Giỏ hàng
 			</h3>
-				<?php 
-				if(isset($_SESSION['dangnhap_home'])){
-					echo '<p style="color:#000;">Xin chào bạn: '.$_SESSION['dangnhap_home'].'<a href="index.php?quanly=giohang&dangxuat=1">Đăng xuất</a></p>';
-				}else{
-					echo '';
-				}
-				?>
+				
 				
 			<!-- //tittle heading -->
 			<div class="checkout-right">
@@ -114,7 +108,7 @@
 					<table class="timetable_sub">
 						<thead>
 							<tr>
-								<th>Thứ tự</th>
+							
 								<th>Sản phẩm</th>
 								<th>Số lượng</th>
 								<th>Tên sản phẩm</th>
@@ -125,20 +119,28 @@
 							</tr>
 						</thead>
 						<tbody>
+						
 						<?php
 						$i = 0;
 						$total = 0;
-						while($row_fetch_giohang = mysqli_fetch_array($sql_lay_giohang)){ 
+						while($row_fetch_giohang = mysqli_fetch_array($sql_lay_giohang))
+						{ 
+							$giasanpham = $row_fetch_giohang['giasanpham'];
+							$soluong = intval($row_fetch_giohang['soluong']);
 
-							$subtotal = $row_fetch_giohang['soluong'] * $row_fetch_giohang['giasanpham'];
-							$total+=$subtotal;
-							$i++;
-						?>
+							// Kiểm tra giá trị hợp lệ của giá sản phẩm
+							if (!empty($giasanpham) && is_numeric($giasanpham)) {
+								$subtotal = $soluong * floatval($giasanpham);
+								$total += $subtotal;
+							} else {
+								$subtotal = 0; // Đặt giá trị tổng thành 0 nếu giá sản phẩm không hợp lệ
+							}
+							?>
 							<tr class="rem1">
-								<td class="invert"><?php echo $i ?></td>
+								
 								<td class="invert-image">
-									<a href="single.html">
-									<img src="images/<?php echo $row_fetch_giohang['hinhanh'] ?>" alt=" " width="200" height="100" class="img-responsive">
+									<a href="">
+										<img src="images/<?php echo $row_fetch_giohang['hinhanh'] ?>" width="1200px" height="300px" class="img-responsive">
 									</a>
 								</td>
 								<td class="invert">
@@ -147,37 +149,46 @@
 								
 									
 								</td>
+								
 								<td class="invert"><?php echo $row_fetch_giohang['tensanpham'] ?></td>
-								<td class="invert"><?php echo number_format($row_fetch_giohang['giasanpham']).'vnđ' ?></td>
-								<td class="invert"><?php echo number_format($subtotal).'vnđ' ?></td>
+								<td class="invert">
+									<?php 
+									if (!empty($row_fetch_giohang['giasanpham']) && is_numeric($row_fetch_giohang['giasanpham'])) {
+										echo number_format(floatval($row_fetch_giohang['giasanpham'])).' USD';
+									} else {
+										echo 'Không có giá';
+									}
+									?>
+								</td>
+
+								<td class="invert"><?php echo number_format($subtotal).' USD' ?></td>
 								<td class="invert">
 									<a href="?quanly=giohang&xoa=<?php echo $row_fetch_giohang['giohang_id'] ?>">Xóa</a>
 								</td>
 							</tr>
-							<?php
-							} 
-							?>
 							<tr>
-								<td colspan="7">Tổng tiền : <?php echo number_format($total).'vnđ' ?></td>
-
+								<td colspan="7">Tổng tiền : <?php echo number_format($total).' USD' ?></td>
 							</tr>
+							<?php
+						}
+							?>
 							<tr>
 								<td colspan="7"><input type="submit" class="btn btn-success" value="Cập nhật giỏ hàng" name="capnhatsoluong">
 								<?php 
 								$sql_giohang_select = mysqli_query($con,"SELECT * FROM tbl_giohang");
 								$count_giohang_select = mysqli_num_rows($sql_giohang_select);
 
-								if(isset($_SESSION['dangnhap_home']) && $count_giohang_select>0){
-									while($row_1 = mysqli_fetch_array($sql_giohang_select)){
+								if(isset($_SESSION['dangnhap_home']) && $count_giohang_select>0)
+								{
+										while($row_1 = mysqli_fetch_array($sql_giohang_select)){
+									?>
+									
+									<input type="hidden" name="thanhtoan_product_id[]" value="<?php echo $row_1['sanpham_id'] ?>">
+									<input type="hidden" name="thanhtoan_soluong[]" value="<?php echo $row_1['soluong'] ?>">
+									<?php 
+								}
 								?>
-								
-								<input type="hidden" name="thanhtoan_product_id[]" value="<?php echo $row_1['sanpham_id'] ?>">
-								<input type="hidden" name="thanhtoan_soluong[]" value="<?php echo $row_1['soluong'] ?>">
-								<?php 
-							}
-								?>
-								<input type="submit" class="btn btn-primary" value="Thanh toán giỏ hàng" name="thanhtoandangnhap">
-		
+									<input type="submit" class="btn btn-primary" value="Thanh toán giỏ hàng" name="thanhtoandangnhap">
 								<?php
 								} 
 								?>

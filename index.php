@@ -6,7 +6,7 @@
 <html lang="zxx">
 
 <head>
-	<title>Web bán điện máy</title>
+	<title>Book stores</title>
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8" />
@@ -48,33 +48,42 @@
 <body>
 	<?php
 	include('include/topbar.php'); 
-	include('include/menu.php');
-	include('include/slider.php');
+	?>
+	<div class="wrapper">
+		<div class="vertical-menu-container">
+		<?php include('include/menu.php');?>
+		</div>
+		<div class="content-container">
+			<?php
+				
 
-	if(isset($_GET['quanly'])){
-		$tam = $_GET['quanly'];
-	}else{
-		$tam = '';
-	}
+				if(isset($_GET['quanly'])){
+					$tam = $_GET['quanly'];
+				}else{
+					$tam = '';
+				}
 
-	if($tam=='danhmuc'){
-		include('include/danhmuc.php');
-	}elseif($tam=='chitietsp'){
-		include('include/chitietsp.php');
-	}elseif($tam=='giohang') {
-		include('include/giohang.php');
-	}elseif ($tam=='timkiem') {
-		include('include/timkiem.php');
-	}elseif ($tam=='tintuc') {
-		include('include/tintuc.php');
-	}elseif ($tam=='chitiettin') {
-		include('include/chitiettin.php');
-	}elseif ($tam=='xemdonhang') {
-		include('include/xemdonhang.php');
-	}else{
-		include('include/home.php'); 
-	}
-	 
+				if($tam=='danhmuc'){
+					include('include/danhmuc.php');
+				}elseif($tam=='chitietsp'){
+					include('include/chitietsp.php');
+				}elseif($tam=='giohang') {
+					include('include/giohang.php');
+				}elseif ($tam=='timkiem') {
+					include('include/timkiem.php');
+				}elseif ($tam=='tintuc') {
+					include('include/tintuc.php');
+				}elseif ($tam=='chitiettin') {
+					include('include/chitiettin.php');
+				}elseif ($tam=='xemdonhang') {
+					include('include/xemdonhang.php');
+				}else{
+					include('include/home.php'); 
+				}
+			?>
+    	</div>
+	</div>
+	<?php
 	include('include/footer.php'); 
 	?>
 	<!-- js-files -->

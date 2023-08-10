@@ -32,7 +32,7 @@
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-	<h2 align="center">Đăng nhập Admin</h2>
+	<h2 alight="center">Đăng nhập Admin</h2>
 	<div class="col-md-6">
 	<div class="form-group">
 		<form action="" method="POST">

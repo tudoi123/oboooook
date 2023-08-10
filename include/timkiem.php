@@ -13,7 +13,7 @@
 	<div class="ads-grid py-sm-5 py-4">
 		<div class="container py-xl-4 py-lg-2">
 			<!-- tittle heading -->
-			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">Từ khóa tìm kiếm : <?php echo $title ?></h3>
+			<h3 class="tittle-w3l text-center mb-lg-5 mb-sm-4 mb-3">Kết quả tìm kiếm : <?php echo $title ?></h3>
 			<!-- //tittle heading -->
 			<div class="row">
 				<!-- product left -->
@@ -40,8 +40,8 @@
 												<a href="?quanly=chitietsp&id=<?php echo $row_sanpham['sanpham_id'] ?>"><?php echo $row_sanpham['sanpham_name'] ?></a>
 											</h4>
 											<div class="info-product-price my-2">
-												<span class="item_price"><?php echo number_format($row_sanpham['sanpham_giakhuyenmai']).'vnđ' ?></span>
-												<del><?php echo number_format($row_sanpham['sanpham_gia']).'vnđ' ?></del>
+												<span class="item_price"><?php echo number_format($row_sanpham['sanpham_giakhuyenmai']).'USD' ?></span>
+												<del><?php echo number_format($row_sanpham['sanpham_gia']).'USD' ?></del>
 											</div>
 											<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
 												<form action="?quanly=giohang" method="post">

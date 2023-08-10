@@ -132,7 +132,9 @@ p.dont-do a {
     letter-spacing: 1px;
     padding: 10px 14px;
 }
-
+.navbar-nav .nav-link {
+    font-size: 200px; /* Điều chỉnh kích thước chữ tại đây */
+}
 .modal-footer .btn-primary {
     background-color: #0e0e0e;
     border-color: #0e0e0e;
@@ -1459,7 +1461,7 @@ table.timetable_sub {
 }
 
 td.invert-image a img {
-    width: 30%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -2500,7 +2502,7 @@ div#testimonials h4.m-title {
         white-space: nowrap;
     }
     td.invert-image a img {
-        width: 60%;
+        width: 100%;
     }
     /* //checkout */
     h3.w3-head {

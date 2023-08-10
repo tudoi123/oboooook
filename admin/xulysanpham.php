@@ -199,8 +199,8 @@
 						<td><img src="../uploads/<?php echo $row_sp['sanpham_image'] ?>" height="100" width="80"></td>
 						<td><?php echo $row_sp['sanpham_soluong'] ?></td>
 						<td><?php echo $row_sp['category_name'] ?></td>
-						<td><?php echo number_format($row_sp['sanpham_gia']).'vnđ' ?></td>
-						<td><?php echo number_format($row_sp['sanpham_giakhuyenmai']).'vnđ' ?></td>
+						<td><?php echo number_format($row_sp['sanpham_gia']).' USD' ?></td>
+						<td><?php echo number_format($row_sp['sanpham_giakhuyenmai']).' USD' ?></td>
 						<td><a href="?xoa=<?php echo $row_sp['sanpham_id'] ?>">Xóa</a> || <a href="xulysanpham.php?quanly=capnhat&capnhat_id=<?php echo $row_sp['sanpham_id'] ?>">Cập nhật</a></td>
 					</tr>
 				<?php
