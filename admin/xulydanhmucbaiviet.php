@@ -22,35 +22,82 @@
 	<meta charset="UTF-8">
 	<title>Danh mục</title>
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<style>
+    /* Đổi màu nền của body */
+    body {
+      background-color: #f9f9f9;
+    }
+
+    /* Đổi màu chữ trong thanh điều hướng */
+    .navbar-light .navbar-nav .nav-link {
+      color: #ffcc00;
+    }
+
+    /* Điều chỉnh kích thước chữ trong thanh điều hướng */
+    .navbar-nav .nav-link {
+      font-size: 20px;
+    }
+
+    /* Căn giữa các mục trong thanh điều hướng */
+    .navbar-nav.mx-auto {
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <div class="collapse navbar-collapse" id="navbarNav">
-	    <ul class="navbar-nav">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="xulydonhang.php">Đơn hàng <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="xulydanhmuc.php">Danh mục</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="xulydanhmucbaiviet.php">Danh mục Bài viết</a>
-	      </li>
-	         <li class="nav-item">
-	        <a class="nav-link" href="xulybaiviet.php">Bài viết</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="xulysanpham.php">Sản phẩm</a>
-	      </li>
-	       <li class="nav-item">
-	         <a class="nav-link" href="xulykhachhang.php">Khách hàng</a>
-	      </li>
-	      
-	    </ul>
-	  </div>
-	</nav><br><br>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto"> <!-- Sử dụng lớp mx-auto để căn giữa các mục -->
+          <li class="nav-item active">
+            <a class="nav-link" href="xulydonhang.php">Đơn hàng <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulydanhmuc.php">Danh mục</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulydanhmucbaiviet.php">Danh mục Bài viết</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulybaiviet.php">Bài viết</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulysanpham.php">Sản phẩm</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulykhachhang.php">Khách hàng</a>
+          </li>
+        </ul>
+      </div>
+    </nav><br><br>
 	<div class="container">
 		<div class="row">
+			
+			<div class="col-md-8">
+				<h4>Liệt kê danh mục</h4>
+				<?php
+				$sql_select = mysqli_query($con,"SELECT * FROM tbl_danhmuc_tin ORDER BY danhmuctin_id DESC"); 
+				?>
+				<table class="table table-bordered ">
+					<tr>
+						<th>Thứ tự</th>
+						<th>Tên danh mục</th>
+						<th>Quản lý</th>
+					</tr>
+					<?php
+					$i = 0;
+					while($row_category = mysqli_fetch_array($sql_select)){ 
+						$i++;
+					?>
+					<tr>
+						<td><?php echo $i; ?></td>
+						<td><?php echo $row_category['tendanhmuc'] ?></td>
+						<td><a href="?xoa=<?php echo $row_category['danhmuctin_id'] ?>">Xóa</a> || <a href="?quanly=capnhat&id=<?php echo $row_category['danhmuctin_id'] ?>">Cập nhật</a></td>
+					</tr>
+					<?php
+					} 
+					?>
+				</table>
+			</div>
 			<?php
 			if(isset($_GET['quanly'])=='capnhat'){
 				$id_capnhat = $_GET['id'];
@@ -82,32 +129,6 @@
 			} 
 			
 				?>
-			<div class="col-md-8">
-				<h4>Liệt kê danh mục</h4>
-				<?php
-				$sql_select = mysqli_query($con,"SELECT * FROM tbl_danhmuc_tin ORDER BY danhmuctin_id DESC"); 
-				?>
-				<table class="table table-bordered ">
-					<tr>
-						<th>Thứ tự</th>
-						<th>Tên danh mục</th>
-						<th>Quản lý</th>
-					</tr>
-					<?php
-					$i = 0;
-					while($row_category = mysqli_fetch_array($sql_select)){ 
-						$i++;
-					?>
-					<tr>
-						<td><?php echo $i; ?></td>
-						<td><?php echo $row_category['tendanhmuc'] ?></td>
-						<td><a href="?xoa=<?php echo $row_category['danhmuctin_id'] ?>">Xóa</a> || <a href="?quanly=capnhat&id=<?php echo $row_category['danhmuctin_id'] ?>">Cập nhật</a></td>
-					</tr>
-					<?php
-					} 
-					?>
-				</table>
-			</div>
 		</div>
 	</div>
 	

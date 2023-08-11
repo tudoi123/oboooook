@@ -45,36 +45,91 @@
 	<meta charset="UTF-8">
 	<title>Sản phẩm</title>
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<style>
+    /* Đổi màu nền của body */
+    body {
+      background-color: #f9f9f9;
+    }
+
+    /* Đổi màu chữ trong thanh điều hướng */
+    .navbar-light .navbar-nav .nav-link {
+      color: #ffcc00;
+    }
+
+    /* Điều chỉnh kích thước chữ trong thanh điều hướng */
+    .navbar-nav .nav-link {
+      font-size: 20px;
+    }
+
+    /* Căn giữa các mục trong thanh điều hướng */
+    .navbar-nav.mx-auto {
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <div class="collapse navbar-collapse" id="navbarNav">
-	    <ul class="navbar-nav">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="xulydonhang.php">Đơn hàng <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="xulydanhmuc.php">Danh mục</a>
-	      </li>
-	       <li class="nav-item">
-	        <a class="nav-link" href="xulydanhmucbaiviet.php">Danh mục Bài viết</a>
-	      </li>
-	       <li class="nav-item">
-	        <a class="nav-link" href="xulybaiviet.php">Bài viết</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="xulysanpham.php">Sản phẩm</a>
-	      </li>
-	       <li class="nav-item">
-	        <a class="nav-link" href="xulykhachhang.php">Khách hàng</a>
-	      </li>
-	      
-	    </ul>
-	  </div>
-	</nav><br><br>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto"> <!-- Sử dụng lớp mx-auto để căn giữa các mục -->
+          <li class="nav-item active">
+            <a class="nav-link" href="xulydonhang.php">Đơn hàng <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulydanhmuc.php">Danh mục</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulydanhmucbaiviet.php">Danh mục Bài viết</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulybaiviet.php">Bài viết</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulysanpham.php">Sản phẩm</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulykhachhang.php">Khách hàng</a>
+          </li>
+        </ul>
+      </div>
+    </nav><br><br>
 	<div class="container">
 		<div class="row">
-		<?php
+			<div class="col-md-8">
+				<h4>Liệt kê bài viết</h4>
+				<?php
+				$sql_select_bv = mysqli_query($con,"SELECT * FROM tbl_baiviet,tbl_danhmuc_tin WHERE tbl_baiviet.danhmuctin_id=tbl_danhmuc_tin.danhmuctin_id ORDER BY tbl_baiviet.baiviet_id DESC"); 
+				?> 
+				<table class="table table-bordered ">
+					<tr>
+						<th>Thứ tự</th>
+						<th>Tên sản phẩm</th>
+						<th>Hình ảnh</th>
+					
+						<th>Danh mục</th>
+						
+						<th>Quản lý</th>
+					</tr>
+					<?php
+					$i = 0;
+					while($row_bv = mysqli_fetch_array($sql_select_bv)){ 
+						$i++;
+					?> 
+					<tr>
+						<td><?php echo $i ?></td>
+						<td><?php echo $row_bv['tenbaiviet'] ?></td>
+						<td><img src="../uploads/<?php echo $row_bv['baiviet_image'] ?>" height="100" width="80"></td>
+
+						<td><?php echo $row_bv['tendanhmuc'] ?></td>
+						
+						<td><a href="?xoa=<?php echo $row_bv['baiviet_id'] ?>">Xóa</a> || <a href="xulybaiviet.php?quanly=capnhat&capnhat_id=<?php echo $row_bv['baiviet_id'] ?>">Cập nhật</a></td>
+					</tr>
+				<?php
+					} 
+					?> 
+					
+				</table>
+			</div>
+			<?php
 			if(isset($_GET['quanly'])=='capnhat'){
 				$id_capnhat = $_GET['capnhat_id'];
 				$sql_capnhat = mysqli_query($con,"SELECT * FROM tbl_baiviet WHERE baiviet_id='$id_capnhat'");
@@ -150,47 +205,13 @@
 						}
 						?>
 					</select><br>
-					<input type="submit" name="thembaiviet" value="Thêm bài viết" class="btn btn-default">
+					<input type="submit" name="thembaiviet" value="Thêm bài viết" class="btn btn-red">
 				</form>
 				</div>
 				<?php
 			} 
 			
 				?>
-			<div class="col-md-8">
-				<h4>Liệt kê bài viết</h4>
-				<?php
-				$sql_select_bv = mysqli_query($con,"SELECT * FROM tbl_baiviet,tbl_danhmuc_tin WHERE tbl_baiviet.danhmuctin_id=tbl_danhmuc_tin.danhmuctin_id ORDER BY tbl_baiviet.baiviet_id DESC"); 
-				?> 
-				<table class="table table-bordered ">
-					<tr>
-						<th>Thứ tự</th>
-						<th>Tên sản phẩm</th>
-						<th>Hình ảnh</th>
-					
-						<th>Danh mục</th>
-						
-						<th>Quản lý</th>
-					</tr>
-					<?php
-					$i = 0;
-					while($row_bv = mysqli_fetch_array($sql_select_bv)){ 
-						$i++;
-					?> 
-					<tr>
-						<td><?php echo $i ?></td>
-						<td><?php echo $row_bv['tenbaiviet'] ?></td>
-						<td><img src="../uploads/<?php echo $row_bv['baiviet_image'] ?>" height="100" width="80"></td>
-
-						<td><?php echo $row_bv['tendanhmuc'] ?></td>
-						
-						<td><a href="?xoa=<?php echo $row_bv['baiviet_id'] ?>">Xóa</a> || <a href="xulybaiviet.php?quanly=capnhat&capnhat_id=<?php echo $row_bv['baiviet_id'] ?>">Cập nhật</a></td>
-					</tr>
-				<?php
-					} 
-					?> 
-				</table>
-			</div>
 		</div>
 	</div>
 	

@@ -8,37 +8,57 @@
 	<meta charset="UTF-8">
 	<title>Khách hàng</title>
 	<link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<style>
+    /* Đổi màu nền của body */
+    body {
+      background-color: #f9f9f9;
+    }
+
+    /* Đổi màu chữ trong thanh điều hướng */
+    .navbar-light .navbar-nav .nav-link {
+      color: #ffcc00;
+    }
+
+    /* Điều chỉnh kích thước chữ trong thanh điều hướng */
+    .navbar-nav .nav-link {
+      font-size: 20px;
+    }
+
+    /* Căn giữa các mục trong thanh điều hướng */
+    .navbar-nav.mx-auto {
+      justify-content: center;
+    }
+  </style>
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <div class="collapse navbar-collapse" id="navbarNav">
-	    <ul class="navbar-nav">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="xulydonhang.php">Đơn hàng <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="xulydanhmuc.php">Danh mục</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="xulysanpham.php">Sản phẩm</a>
-	      </li>
-	         <li class="nav-item">
-	        <a class="nav-link" href="xulydanhmucbaiviet.php">Danh mục Bài viết</a>
-	      </li>
-	         <li class="nav-item">
-	        <a class="nav-link" href="xulybaiviet.php">Bài viết</a>
-	      </li>
-	       <li class="nav-item">
-	        <a class="nav-link" href="xulykhachhang.php">Khách hàng</a>
-	      </li>
-	      
-	    </ul>
-	  </div>
-	</nav><br><br>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto"> <!-- Sử dụng lớp mx-auto để căn giữa các mục -->
+          <li class="nav-item active">
+            <a class="nav-link" href="xulydonhang.php">Đơn hàng <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulydanhmuc.php">Danh mục</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulydanhmucbaiviet.php">Danh mục Bài viết</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulybaiviet.php">Bài viết</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulysanpham.php">Sản phẩm</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="xulykhachhang.php">Khách hàng</a>
+          </li>
+        </ul>
+      </div>
+    </nav><br><br>
 	<div class="container-fluid">
 		<div class="row">
 			
-			<div class="col-md-12">
+		<div class="col-md-12">
 				<h4>Khách hàng</h4>
 				<?php
 				$sql_select_khachhang = mysqli_query($con,"SELECT * FROM tbl_khachhang,tbl_giaodich WHERE tbl_khachhang.khachhang_id=tbl_giaodich.khachhang_id GROUP BY tbl_giaodich.magiaodich ORDER BY tbl_khachhang.khachhang_id DESC"); 
@@ -91,7 +111,6 @@
 						<th>Mã giao dịch</th>
 						<th>Tên sản phẩm</th>
 						<th>Ngày đặt</th>
-						
 					</tr>
 					<?php
 					$i = 0;
@@ -114,6 +133,7 @@
 					?> 
 				</table>
 			</div>
+			
 		</div>
 	</div>
 	
