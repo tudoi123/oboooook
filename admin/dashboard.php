@@ -78,7 +78,7 @@
 		</nav>
       </div>
     </nav>
-	<p>Xin chào: <?php echo $_SESSION['dangnhap']; ?> <a href="?login=dangxuat">Đăng xuất</a></p>
+	
   </div>
 
   <!-- Thêm liên kết Bootstrap JS và Popper.js (cho dropdowns và các chức năng khác) -->
