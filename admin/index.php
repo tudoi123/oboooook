@@ -17,7 +17,7 @@
 			if($count>0){
 				$_SESSION['dangnhap'] = $row_dangnhap['admin_name'];
 				$_SESSION['admin_id'] = $row_dangnhap['admin_id'];
-				header('Location: dashboard.php');
+				header('Location: xulysanpham.php');
 			}else{
 				echo '<p>Tài khoản hoặc mật khẩu sai</p>';
 			}
@@ -50,7 +50,7 @@
                 <input type="password" name="matkhau" placeholder="Điền mật khẩu" class="form-control">
               </div>
               <div class="text-center">
-                <input type="submit" name="dangnhap" class="btn btn-primary" value="Đăng nhập Admin">
+                <input type="submit" name="dangnhap" class="btn btn-primary" value="Đăng nhập">
               </div>
             </form>
           </div>
